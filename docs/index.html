@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tiny open-source web UI over yt-dlp — download single videos, shorts and reels, or entire channels, from YouTube, Facebook, Instagram, LinkedIn and 1800+ sites. Educational use only.">
+<title>Universal Video Downloader</title>
+<style>
+  :root { color-scheme: dark }
+  * { box-sizing: border-box }
+  body { font: 16px/1.6 system-ui, sans-serif; background: #0f1115; color: #e6e6e6;
+         max-width: 780px; margin: 0 auto; padding: 48px 20px }
+  h1 { font-size: 2rem; margin-bottom: 4px }
+  .tag { color: #8a8f98; margin-top: 0 }
+  a { color: #6ea8fe }
+  .btns { margin: 20px 0 36px }
+  .btn { display: inline-block; padding: 11px 20px; border-radius: 9px; text-decoration: none;
+         font-weight: 600; margin-right: 10px }
+  .primary { background: #3b82f6; color: #fff }
+  .ghost { border: 1px solid #2a2f3a; color: #e6e6e6 }
+  h2 { font-size: 1.2rem; margin-top: 40px; border-bottom: 1px solid #2a2f3a; padding-bottom: 8px }
+  pre { background: #0a0c10; border: 1px solid #2a2f3a; border-radius: 10px; padding: 14px;
+        overflow-x: auto; font-size: 14px }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem }
+  td, th { border: 1px solid #2a2f3a; padding: 8px 10px; text-align: left }
+  th { color: #8a8f98 }
+  code { background: #171a21; border-radius: 5px; padding: 2px 6px; font-size: .9em }
+  pre code { background: none; padding: 0 }
+  .note { border: 1px solid #3b82f6; border-radius: 10px; padding: 12px 16px; background: #10182b }
+  footer { color: #8a8f98; font-size: .85rem; margin-top: 48px; border-top: 1px solid #2a2f3a; padding-top: 16px }
+  ul { padding-left: 22px }
+  /* decorative replica of the actual app UI */
+  .demo { border: 1px solid #2a2f3a; border-radius: 14px; padding: 22px; margin: 28px 0;
+          pointer-events: none; user-select: none; background: #0f1115;
+          box-shadow: 0 20px 60px rgba(0,0,0,.45) }
+  .demo fieldset { border: 1px solid #2a2f3a; border-radius: 10px; margin: 12px 0; padding: 12px 14px }
+  .demo legend { color: #8a8f98; padding: 0 6px; font-size: .85rem }
+  .demo .in { background: #171a21; border: 1px solid #2a2f3a; border-radius: 8px;
+              padding: 9px 10px; color: #8a8f98 }
+  .demo .full { width: 100%; margin-bottom: 10px }
+  .demo label { margin-right: 14px; font-size: .92rem }
+  .demo .dl { background: #3b82f6; color: #fff; border-radius: 8px; padding: 10px 18px;
+              display: inline-block; font-weight: 600 }
+  .demo .log { background: #0a0c10; border: 1px solid #2a2f3a; border-radius: 10px;
+               padding: 12px; font: 13px/1.5 monospace; color: #9aa3af; margin-top: 14px }
+</style>
+
+<h1>Universal Video Downloader</h1>
+<p class="tag">A tiny, open-source web UI over <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> —
+YouTube · Facebook · Instagram · LinkedIn · <a href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md">1800+ sites</a></p>
+
+<div class="btns">
+  <a class="btn primary" href="https://github.com/NinjaScript26/universal-video-downloader">View on GitHub</a>
+  <a class="btn ghost" href="https://github.com/NinjaScript26/universal-video-downloader/archive/refs/heads/master.zip">Download ZIP</a>
+</div>
+
+<div class="note">
+  <strong>Runs on your computer, not in the cloud.</strong> Videos download straight to your own
+  <code>downloads/</code> folder — nothing passes through anyone else's server. This page is just the
+  project homepage; setup takes about a minute.
+</div>
+
+<div class="demo" aria-hidden="true">
+  <fieldset><legend>Link</legend>
+    <div class="in full">Paste a video, short, reel, channel or playlist link…</div>
+    <label>◉ Single video / short / reel</label>
+    <label>○ Entire channel / playlist / shorts / reels feed</label>
+  </fieldset>
+  <fieldset><legend>Options</legend>
+    <label>Quality <span class="in">Best available ▾</span></label>
+    <label>Login cookies <span class="in">none ▾</span></label>
+  </fieldset>
+  <span class="dl">Download</span>
+  <div class="log">[youtube] Extracting URL…<br>[download]  42.7% of 218.53KiB at 10.02MiB/s ETA 00:01<br>[Merger] Merging formats into "downloads/…mp4"</div>
+</div>
+
+<h2>Quick start</h2>
+<pre><code># 1. get yt-dlp (once)
+pipx install yt-dlp        # or see README for the standalone binary
+
+# 2. get the app
+git clone https://github.com/NinjaScript26/universal-video-downloader.git
+cd universal-video-downloader
+
+# 3. run it
+python3 app.py             # then open http://127.0.0.1:8000</code></pre>
+<p>Also install <a href="https://ffmpeg.org">ffmpeg</a> (for MP3 / best-quality merging) and, for YouTube,
+have <a href="https://nodejs.org">node</a> or <a href="https://deno.com">deno</a> on your PATH — auto-detected.</p>
+
+<h2>Features</h2>
+<ul>
+  <li><strong>Two modes</strong> — one video / short / reel, or an <strong>entire channel, playlist, shorts tab or reels feed</strong> (optional "max videos" limit)</li>
+  <li>Quality picker: best / 1080p / 720p / 480p / MP3 (audio only)</li>
+  <li>Private or login-gated content: reuses your own browser's logged-in session — no cookie files to export</li>
+  <li>Live progress streamed straight from yt-dlp, with cancel</li>
+  <li><strong>Zero Python dependencies</strong> — one file of stdlib, plus the yt-dlp CLI</li>
+</ul>
+
+<h2>What links work?</h2>
+<table>
+  <tr><th>What</th><th>Example</th><th>Mode</th></tr>
+  <tr><td>YouTube video / Short</td><td><code>youtube.com/watch?v=…</code>, <code>youtube.com/shorts/…</code></td><td>Single</td></tr>
+  <tr><td>Whole channel</td><td><code>youtube.com/@name/videos</code></td><td>Batch</td></tr>
+  <tr><td>Channel's Shorts only</td><td><code>youtube.com/@name/shorts</code></td><td>Batch</td></tr>
+  <tr><td>Playlist</td><td><code>youtube.com/playlist?list=…</code></td><td>Batch</td></tr>
+  <tr><td>Instagram post / reel</td><td><code>instagram.com/reel/…</code></td><td>Single</td></tr>
+  <tr><td>Instagram profile reels</td><td><code>instagram.com/username/reels/</code></td><td>Batch</td></tr>
+  <tr><td>Facebook video / reel</td><td><code>facebook.com/watch?v=…</code>, <code>fb.watch/…</code></td><td>Single</td></tr>
+  <tr><td>LinkedIn post video</td><td><code>linkedin.com/posts/…</code></td><td>Single</td></tr>
+</table>
+
+<footer>
+  <strong>Educational use only</strong> — download only content you own, that is freely licensed, or that
+  you otherwise have the right to download. Respect copyright law and each platform's Terms of Service.
+  <br>MIT licensed · <a href="https://github.com/NinjaScript26/universal-video-downloader">github.com/NinjaScript26/universal-video-downloader</a>
+</footer>
+</html>
